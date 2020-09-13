@@ -1,15 +1,17 @@
 import uuid
-from datetime import datetime
-from mongoengine import *
-from mongoengine import connect
-connect('api')
 
 
-class Secret(Document):
-    secret_key = UUIDField(primary_key=True, default=uuid.uuid4, editable=False, binary=False)
-    pass_phrase = StringField('Code Phrase', max_length=90, allow_blank=True)
-    text = StringField('Secret Text', max_length=1000, allow_blank=True)
-    life_time = DateTimeField(default=datetime.utcnow)
+from django.db import models
+from django.db.models.functions import datetime
+from django_cryptography.fields import encrypt
+
+
+class Secret(models.Model):
+    secret_key = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    pass_phrase = models.CharField('Pass', max_length=200)
+    text = models.TextField('text', max_length=200)
+    life_time = models.DateTimeField(auto_now=True)
 
 
 
+# default=uuid.uuid4, editable=False, binary=False

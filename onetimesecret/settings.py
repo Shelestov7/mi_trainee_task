@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['*']
 
 MONGOADMIN_OVERRIDE_ADMIN = True
 
+SIGNING_BACKEND = 'django_cryptography.core.signing.TimestampSigner'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -86,12 +87,23 @@ WSGI_APPLICATION = 'onetimesecret.wsgi.application'
 #     }
 # }
 DATABASES = {
+
     'default': {
-        'ENGINE': 'djongo',
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
         'NAME': 'api',
-        'HOST': 'localhost',
-        'PORT': 27017,
+
+        'USER': 're',
+
+        'PASSWORD': '123',
+
+        'HOST': '192.168.1.130',
+
+        'PORT': '5432',
+
     }
+
 }
 
 # Password validation
